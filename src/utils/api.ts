@@ -3,6 +3,15 @@ import { ApiResponse, GeneratedContent, ChatMessage, ProviderConfig } from '../t
 import { storageService } from './storage';
 
 class ApiService {
+  private static instance: ApiService;
+  private constructor() {}
+
+  static getInstance(): ApiService {
+    if (!ApiService.instance) {
+      ApiService.instance = new ApiService();
+    }
+    return ApiService.instance;
+  }
   private getProviderConfig(): ProviderConfig {
     return storageService.getProviderConfig();
   }

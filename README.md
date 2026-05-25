@@ -1,124 +1,91 @@
-# CreativeAI
+ # CreativeAI — AI Creative Studio
 
-An elegant AI-powered creative platform featuring real-time chat, intelligent image generation, and video synthesis capabilities. Built with modern web technologies for a seamless user experience.
+ ![CreativeAI](vite.svg)
 
-## Features
+ A polished, production-ready front-end for generating creative content using multiple AI providers. Designed for artists, creators, and developers who want an elegant interface to chat with models, generate images, and synthesize short videos.
 
-- **AI Chat Interface** - Engage with an intelligent conversational AI for creative assistance
-- **Image Generation** - Create stunning images with AI-powered generation
-- **Video Generation** - Synthesize videos from text prompts
-- **User Authentication** - Secure login and registration system
-- **Chat History** - Access and manage your previous conversations
-- **User Settings** - Personalized preferences and account management
-- **Responsive Design** - Beautiful, modern UI that works on all devices
-- **Real-time Updates** - Instant feedback and smooth animations
+ ----
 
-## Tech Stack
+ ## Highlights
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **UI Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Routing**: React Router v6
-- **HTTP Client**: Axios
-- **Notifications**: React Hot Toast
-- **Date Utilities**: date-fns
+ - Multi-provider support: OpenRouter, Mistral AI, Google Gemini, OpenAI, and custom providers
+ - Beautiful, responsive UI with Tailwind CSS and Framer Motion
+ - Demo mode (one-click autofill login) for quick testing
+ - Settings panel for API keys, model selection, temperature and token control
+ - Local storage for chat history and generated content
+ - Accessible, mobile-first design with polished animations
 
-## Getting Started
+ ## Badges
 
-### Prerequisites
+ ![Vite](https://img.shields.io/badge/bundler-vite-brightgreen)
+ ![React](https://img.shields.io/badge/framework-react-blue)
+ ![TypeScript](https://img.shields.io/badge/lang-typescript-blue)
+ ![License](https://img.shields.io/badge/license-MIT-green)
 
-- Node.js (v16 or higher)
-- npm or yarn package manager
+ ----
 
-### Installation
+ ## Demo
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/CreativeAI.git
-cd CreativeAI
-```
+ - Try the demo login on the landing page: click **Try Demo Login** to auto-fill credentials (demo@creativeai.com / demo123).
 
-2. Install dependencies:
-```bash
-npm install
-```
+ ## Local Development
 
-3. Start the development server:
-```bash
-npm run dev
-```
+ Prerequisites:
+ - Node.js 16+
 
-The application will be available at `http://localhost:5173`
+ Install and run locally:
+ ```bash
+ git clone https://github.com/mujtbabbas/CreativeAI.git
+ cd CreativeAI
+ npm install
+ npm run dev
+ ```
 
-## Available Scripts
+ The app will be available at `http://localhost:5173` by default.
 
-- `npm run dev` - Start development server with hot module replacement
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run lint` - Run ESLint to check code quality
+ ## Production Build
 
-## Project Structure
+ Build the app:
+ ```bash
+ npm run build
+ npm run preview
+ ```
 
-```
-src/
-├── components/          # React components
-│   ├── Auth/           # Login and registration components
-│   ├── Chat/           # Chat interface components
-│   ├── Generation/     # Image and video generation components
-│   ├── History/        # Chat history view
-│   ├── Layout/         # Header and sidebar layout
-│   └── Settings/       # User settings components
-├── types/              # TypeScript type definitions
-├── utils/              # Utility functions
-│   ├── api.ts         # API communication
-│   ├── auth.ts        # Authentication logic
-│   └── storage.ts     # Local storage utilities
-├── App.tsx            # Main application component
-├── main.tsx           # React entry point
-└── index.css          # Global styles
-```
+ ## Deploying to Vercel (recommended)
 
-## Configuration Files
+ 1. Create a new Vercel project and connect your GitHub repository.
+ 2. Set the build command to `npm run build` and the output directory to `dist` (Vite default).
+ 3. Environment variables: store any API keys you intend to use on serverless functions or in the app settings. Note: this front-end stores provider keys in local storage (Settings page) — for production use you should proxy requests through a secure server or serverless function and keep secrets server-side.
+ 4. Important: If you see a white screen with `Uncaught TypeError: K2.getInstance is not a function` in the browser console, it usually means a singleton export was misconfigured in `src/utils/api.ts`. This repository includes a fix — rebuild and redeploy. Also ensure `vite.svg` exists at the repository root (this repo includes a small SVG to avoid a 404 on Vercel).
 
-- `vite.config.ts` - Vite build configuration
-- `tailwind.config.js` - Tailwind CSS customization
-- `tsconfig.json` - TypeScript compiler options
-- `eslint.config.js` - ESLint rules and configuration
-- `postcss.config.js` - PostCSS plugin configuration
+ ## Usage
 
-## Development
+ - Go to **Settings** to configure an AI provider and add your API key.
+ - Use **Chat** for text-based creative conversations.
+ - Use **Image Generation** to craft prompts and create images.
+ - Use **Video Generation** to synthesize demo videos (or integrate a real provider).
+ - View past generations in **History** and download your outputs.
 
-### Code Quality
+ ## Troubleshooting
 
-The project uses ESLint for code quality and TypeScript for type safety. Run linting with:
-```bash
-npm run lint
-```
+ White screen on deployment? Check the browser console:
 
-### Component Structure
+ - `K2.getInstance is not a function` — fix: ensure `src/utils/api.ts` defines `static getInstance()` and exports `apiService = ApiService.getInstance()` (this repo includes the fix).
+ - `vite.svg 404` — fix: include a `vite.svg` at the project root or update `index.html` to reference your favicon.
+ - If providers return errors, verify API keys in the **Settings** page. For secure usage, proxy provider requests through a server.
 
-Components are organized by feature:
-- **Auth**: Handles user authentication flows
-- **Chat**: Main chat interface and interactions
-- **Generation**: AI-powered image and video creation
-- **History**: User chat history management
-- **Layout**: Shared layout components (Header, Sidebar)
-- **Settings**: User preferences and account settings
+ ## Security Notes
 
-## Contributing
+ This front-end currently stores provider API keys in localStorage for convenience. For production usage, create a server-side proxy or serverless functions to keep keys secret and avoid exposing them to clients.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+ ## Contributing
 
-## License
+ Contributions are welcome — open an issue or a pull request with a clear description and tests when applicable.
 
-This project is open source and available under the MIT License.
+ ## License
 
-## Support
+ MIT
 
-For issues, questions, or suggestions, please open an issue on the repository.
+ ----
 
----
-
-Built with ❤️ using React, TypeScript, and Vite
+ Built with ❤️ — create something extraordinary.
