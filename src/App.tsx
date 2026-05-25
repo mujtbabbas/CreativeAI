@@ -86,45 +86,57 @@ function App() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <div className="w-full max-w-md">
-            <div className="text-center mb-8">
-              <motion.h1 
-                className="text-4xl font-bold text-white mb-2"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                AI Creative Studio
-              </motion.h1>
-              <motion.p 
-                className="text-purple-200"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                Create amazing content with AI
-              </motion.p>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 sm:p-6">
+        <Toaster position="top-right" />
+        <div className="w-full max-w-md">
+          <motion.div
+            className="text-center mb-8 sm:mb-12"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 mb-6"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <span className="text-3xl sm:text-4xl">✨</span>
+            </motion.div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3 sm:mb-4">
+              CreativeAI
+            </h1>
+            <p className="text-sm sm:text-base text-purple-200">
+              Create stunning content with cutting-edge AI
+            </p>
+          </motion.div>
 
-            <AnimatePresence mode="wait">
-              {authMode === 'login' ? (
-                <LoginForm
-                  key="login"
-                  onLogin={handleLogin}
-                  onSwitchToRegister={() => setAuthMode('register')}
-                  loading={isLoading}
-                />
-              ) : (
-                <RegisterForm
-                  key="register"
-                  onRegister={handleRegister}
-                  onSwitchToLogin={() => setAuthMode('login')}
-                  loading={isLoading}
-                />
-              )}
-            </AnimatePresence>
-          </div>
+          <AnimatePresence mode="wait">
+            {authMode === 'login' ? (
+              <LoginForm
+                key="login"
+                onLogin={handleLogin}
+                onSwitchToRegister={() => setAuthMode('register')}
+                loading={isLoading}
+              />
+            ) : (
+              <RegisterForm
+                key="register"
+                onRegister={handleRegister}
+                onSwitchToLogin={() => setAuthMode('login')}
+                loading={isLoading}
+              />
+            )}
+          </AnimatePresence>
+
+          <motion.p
+            className="text-center text-xs sm:text-sm text-purple-300 mt-6 sm:mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Powered by advanced AI providers
+          </motion.p>
         </div>
       </div>
     );
@@ -145,7 +157,7 @@ function App() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              className="h-full"
+              className="h-full overflow-hidden flex flex-col"
             >
               {renderTabContent()}
             </motion.div>
@@ -160,6 +172,16 @@ function App() {
           style: {
             background: '#363636',
             color: '#fff',
+          },
+          success: {
+            style: {
+              background: '#10b981',
+            },
+          },
+          error: {
+            style: {
+              background: '#ef4444',
+            },
           },
         }}
       />

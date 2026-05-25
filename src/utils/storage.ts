@@ -1,4 +1,4 @@
-import { ChatMessage, GeneratedContent } from '../types';
+import { ChatMessage, GeneratedContent, ProviderConfig, UserSettings } from '../types';
 
 export class StorageService {
   private static instance: StorageService;
@@ -49,6 +49,29 @@ export class StorageService {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  saveProviderConfig(config: ProviderConfig): void {
+    localStorage.setItem('providerConfig', JSON.stringify(config));
+  }
+
+  getProviderConfig(): ProviderConfig {
+    const config = localStorage.getItem('providerConfig');
+    return config ? JSON.parse(config) : { type: 'openrouter', apiKey: '', model: 'gpt-3.5-turbo' };
+  }
+
+  saveUserSettings(settings: UserSettings): void {
+    localStorage.setItem('userSettings', JSON.stringify(settings));
+  }
+
+  getUserSettings(): UserSettings {
+    const settings = localStorage.getItem('userSettings');
+    return settings ? JSON.parse(settings) : { 
+      provider: { type: 'openrouter', apiKey: '', model: 'gpt-3.5-turbo' },
+      temperature: 0.7,
+      maxTokens: 1000,
+      theme: 'light'
+    };
   }
 }
 

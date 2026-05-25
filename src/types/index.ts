@@ -29,3 +29,20 @@ export interface ApiResponse<T> {
   data?: T;
   error?: string;
 }
+
+export type ProviderType = 'openai' | 'openrouter' | 'mistral' | 'gemini' | 'custom';
+
+export interface ProviderConfig {
+  type: ProviderType;
+  apiKey: string;
+  model?: string;
+  baseUrl?: string;
+  name?: string;
+}
+
+export interface UserSettings {
+  provider: ProviderConfig;
+  temperature?: number;
+  maxTokens?: number;
+  theme?: 'light' | 'dark';
+}
